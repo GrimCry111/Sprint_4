@@ -60,8 +60,8 @@ class TestBooksCollector:
         collector.add_new_book('Мастер и Маргарита')
         collector.set_book_genre('Мастер и Маргарита', 'Фантастика')
         collector.add_new_book('Библия')
-        collector.set_book_genre('Библия', 'Фантастика')        
-        assert len(collector.get_books_with_specific_genre('Фантастика')) == 2
+        collector.set_book_genre('Библия', 'Ужасы')        
+        assert len(collector.get_books_with_specific_genre('Фантастика')) == 1
 
     def test_get_books_with_specific_genre_no_books_with_genre(self,collector):
         collector.add_new_book('Мастер и Маргарита') 
