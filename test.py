@@ -4,10 +4,6 @@ import pytest
 # класс TestBooksCollector объединяет набор тестов, которыми мы покрываем наше приложение BooksCollector
 # обязательно указывать префикс Test
 class TestBooksCollector:
-
-    @pytest.fixture
-    def collector(self):
-        return BooksCollector()
     
     def test_default_value_in_init(self,collector):
         assert collector.books_genre == {}
@@ -60,12 +56,12 @@ class TestBooksCollector:
         assert collector.get_book_genre('Мастер и Маргарита') is None
 
     # выводим список книг с определённым жанром
-    @pytest.mark.parametrize('specific_genre',['Фантастика', 'Ужасы', 'Детективы', 'Мультфильмы', 'Комедии'])
-    def test_get_books_with_specific_genre_success(self,collector,specific_genre):
+    def test_get_books_with_specific_genre_success(self,collector):
         collector.add_new_book('Мастер и Маргарита')
-        collector.set_book_genre('Мастер и Маргарита', specific_genre)
-        
-        assert len(collector.get_books_with_specific_genre(specific_genre)) == 1
+        collector.set_book_genre('Мастер и Маргарита', 'Фантастика')
+        collector.add_new_book('Библия')
+        collector.set_book_genre('Библия', 'Фантастика')        
+        assert len(collector.get_books_with_specific_genre('Фантастика')) == 2
 
     def test_get_books_with_specific_genre_no_books_with_genre(self,collector):
         collector.add_new_book('Мастер и Маргарита') 
